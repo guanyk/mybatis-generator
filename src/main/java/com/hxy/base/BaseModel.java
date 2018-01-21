@@ -1,4 +1,4 @@
-package com.bestpay.wx.electronic.dao.model.base;
+package com.hxy.base;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,12 +13,12 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-public class BaseDao implements Serializable{
+public class BaseModel implements Serializable{
     private static final long serialVersionUID = -3665540730986053048L;
     /**
      * 主键id，自增长
      */
-    private long id;
+    private String id;
     /**
      * 创建人
      */

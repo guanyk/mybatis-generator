@@ -1,4 +1,4 @@
-package com.hxy.base;
+package com.bestpay.wx.electronic.dao.model.base;
 
 import lombok.Getter;
 import lombok.Setter;

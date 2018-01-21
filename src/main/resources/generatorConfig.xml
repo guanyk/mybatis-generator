@@ -41,6 +41,11 @@
             <property name="enableSubPackages" value="true"/>
             <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
             <property name="trimStrings" value="true"/>
+            <!-- 设置一个根对象，
+            如果设置了这个根对象，那么生成的keyClass或者recordClass会继承这个类；在Table的rootClass属性中可以覆盖该选项
+            注意：如果在key class或者record class中有root class相同的属性，MBG就不会重新生成这些属性了，包括：
+                1，属性名相同，类型相同，有相同的getter/setter方法；-->
+            <property name="rootClass" value="com.hxy.base.BaseModel"/>
         </javaModelGenerator>
         <!--对应的xml mapper文件  -->
         <sqlMapGenerator targetPackage="${sqlMapperPackage}" targetProject="${targetProject}" >
@@ -52,7 +57,9 @@
         </javaClientGenerator>
 
         <!-- 表名对应生成的实体 -->
-        <table tableName="t_user_info" domainObjectName="TUser" />
+        <table tableName="t_survey_data" domainObjectName="TSurveyData" >
+            <columnOverride column="ORDERD" javaType="long" jdbcType="VARCHAR"/>
+        </table>
         <!-- enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false"
         selectByExampleQueryId="false">  指定是否生成操作数据库对应的方法 -->
