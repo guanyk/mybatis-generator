@@ -3,7 +3,9 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <!-- 该配置文件说明插件需要如何生成，以及生成对应的包名，路径等信息。
-      还有重要的就是我们要生成的实体类所对应的的表或者试图 -->
+      还有重要的就是我们要生成的实体类所对应的的表或者试图
+      参照讲解：https://www.jianshu.com/p/e09d2370b796
+       -->
 <generatorConfiguration>
     <properties resource="mybatis_generator.properties" />
     <context id="MBG" targetRuntime="MyBatis3" defaultModelType="conditional">
@@ -13,7 +15,7 @@
 
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
-            <property name="suppressAllComments" value="false"/>
+            <property name="suppressAllComments" value="true"/>
             <!-- 不希望生成的注释中包含时间戳 -->
             <property name="suppressDate" value="true" />
 
@@ -45,7 +47,7 @@
             如果设置了这个根对象，那么生成的keyClass或者recordClass会继承这个类；在Table的rootClass属性中可以覆盖该选项
             注意：如果在key class或者record class中有root class相同的属性，MBG就不会重新生成这些属性了，包括：
                 1，属性名相同，类型相同，有相同的getter/setter方法；-->
-            <property name="rootClass" value="com.hxy.base.BaseModel"/>
+            <property name="rootClass" value="com.bestpay.wx.electronic.dao.model.base.BaseModel"/>
         </javaModelGenerator>
         <!--对应的xml mapper文件  -->
         <sqlMapGenerator targetPackage="${sqlMapperPackage}" targetProject="${targetProject}" >
@@ -57,11 +59,21 @@
         </javaClientGenerator>
 
         <!-- 表名对应生成的实体 -->
-        <table tableName="t_survey_data" domainObjectName="TSurveyData" >
-            <columnOverride column="ORDERD" javaType="long" jdbcType="VARCHAR"/>
+        <table tableName="t_electronic_activity" domainObjectName="TElectronicActivity" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+
+
         </table>
-        <!-- enableCountByExample="false" enableUpdateByExample="false"
-        enableDeleteByExample="false" enableSelectByExample="false"
-        selectByExampleQueryId="false">  指定是否生成操作数据库对应的方法 -->
+        <!--
+           enableCountByExample="false" enableUpdateByExample="false"
+           enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+            schema即为数据库名, tableName为对应的数据库表, domainObjectName是要生成的实体类,
+            如果想要mapper配置文件加入sql的where条件查询, 可以将enableCountByExample等设为true,
+            这样就会生成一个对应domainObjectName的Example类, enableCountByExample等设为false时,
+            就不会生成对应的Example类了.
+            如果table里边不配置property，默认字段都生成为类属性。
+          指定是否生成操作数据库对应的方法 -->
     </context>
 </generatorConfiguration>
